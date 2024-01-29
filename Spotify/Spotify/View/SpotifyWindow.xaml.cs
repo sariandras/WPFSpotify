@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotify
+namespace Spotify.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SpotifyWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SpotifyWindow : Window
     {
-        public MainWindow()
+        public SpotifyWindow()
         {
             InitializeComponent();
         }
