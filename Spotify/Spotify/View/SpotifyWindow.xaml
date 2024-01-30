@@ -4,17 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify.View"
+        xmlns:md="clr-namespace:Spotify.Model"
         mc:Ignorable="d"
-        Title="SpotifyWindow" Height="450" Width="800">
-    <Grid>
-        <Grid Height="80" Background="Black" Margin="0,0,0,353">
-            <Ellipse Height="60" Width="60" Margin="10,10,730,10">
-                <!--<Ellipse.Fill>
-                    --><!--<ImageBrush ImageSource="/BananasGoBad-400.jpg"/>--><!--
-                </Ellipse.Fill>-->
+        Title="Spotify Stats" Height="450" Width="800"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <md:Profile x:Key="profile"/>
+        <md:TopItems x:Key="topitems"/>
+        <md:Item x:Key="item"/>
+    </Window.Resources>
+    <Grid Background="#02070C" DataContext="{StaticResource topitems}">
+        <Grid Margin="0,1,0,355" DataContext="{StaticResource profile}">
+            <Ellipse Height="60" Width="60" Margin="10,10,730,8">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/BananasGoBad-400.jpg"/>
+                </Ellipse.Fill>
             </Ellipse>
-            <TextBlock HorizontalAlignment="Left" Margin="75,10,0,0" TextWrapping="Wrap" Text="Username" Foreground="#1C984E" VerticalAlignment="Top"/>
-            <Border BorderBrush="Red" BorderThickness="1,1,1,1" CornerRadius="30,30,30,30" Width="400" Height="60" Background="#13293E" Margin="395,0,5,0">
+            <TextBlock FontFamily="JosefinSans" FontSize="18" HorizontalAlignment="Left" Margin="89,6,0,0" TextWrapping="Wrap" Text="{Binding DisplayName}" Foreground="#1C984E" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans" FontSize="16" HorizontalAlignment="Left" Margin="89,31,0,0" TextWrapping="Wrap" Text="{Binding Id}" Foreground="#F0F3F5" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans"  FontSize="16" HorizontalAlignment="Left" Margin="89,53,0,0" TextWrapping="Wrap"  Foreground="#F0F3F5" VerticalAlignment="Top">
+                <Run Text="Followed by:"></Run>
+                <Run Text="{Binding Followers.Total}"></Run>
+                <Run Text="users"></Run>
+            </TextBlock>
+            <TextBlock FontFamily="JosefinSans" FontSize="40" HorizontalAlignment="Left" Margin="395,12,0,10" TextWrapping="Wrap" Text="Top tracks:" Foreground="#F0F3F5" />
+
+            <!--<Border BorderBrush="Red" BorderThickness="1,1,1,1" CornerRadius="30,30,30,30" Width="400" Height="60" Background="#13293E" Margin="395,0,5,0">
                 <Grid Margin="363,9,25,-11">
                     <Button  
                            Content="Top genres"
@@ -60,9 +76,30 @@
                         </Button.Resources>
                     </Button>
                 </Grid>
-            </Border>
+            </Border>-->
         </Grid>
-        <Grid Width="400" Background="Chocolate" Margin="0,100,400,0"/>
-        <Grid Width="400" Margin="400,100,0,0"/>
+        <ListView DataContext="{Binding Items}" Background="#02070C" BorderThickness="0" Height="360" Margin="0,74,0,0">
+            <ListBoxItem></ListBoxItem>
+            <ListBoxItem></ListBoxItem>
+            <ListBoxItem></ListBoxItem>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border  BorderThickness="1,1,1,1" CornerRadius="30,30,30,30"  Height="120" Width="800"  Background="#13293E">
+                        <Grid DataContext="{StaticResource item}">
+                            <Ellipse Height="90" Width="90" Margin="10,14,698,14">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/BananasGoBad-400.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock FontFamily="JosefinSans" Foreground="#1C984E" Text="{Binding Name}" Margin="105,14,529,84"/>
+                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Text="{Binding Popularity}" Margin="105,49,529,49"/>
+                            <!--<TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Text="{Binding }" Margin="105,84,529,14"/>-->
+                        </Grid>
+
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Window>

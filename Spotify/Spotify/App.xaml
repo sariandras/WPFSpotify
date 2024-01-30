@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Spotify"
              StartupUri="View/SpotifyWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="JosefinSans">JosefinSans-VariableFont_wght.ttf</FontFamily>
     </Application.Resources>
 </Application>

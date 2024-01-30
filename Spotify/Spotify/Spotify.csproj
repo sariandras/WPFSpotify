@@ -8,7 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BananasGoBad-400.jpg" />
+    <None Remove="Fonts\JosefinSans-VariableFont_wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\JosefinSans-VariableFont_wght.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BananasGoBad-400.jpg" />
   </ItemGroup>
 
 </Project>
