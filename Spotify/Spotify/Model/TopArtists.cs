@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Spotify.Model
 {
-    public class Item
+    // https://api.spotify.com/v1/me/top/artists
+    public class TopArtistItem
     {
         public ExternalUrls? ExternalUrls { get; set; }
         public Followers? Followers { get; set; }
@@ -20,7 +21,7 @@ namespace Spotify.Model
         public string? Uri { get; set; }
     }
 
-    public class TopItems
+    public class TopArtists
     {
         public string? Href { get; set; }
         public int Limit { get; set; }
@@ -28,6 +29,6 @@ namespace Spotify.Model
         public int Offset { get; set; }
         public string? Previous { get; set; }
         public int Total { get; set; }
-        public List<Item>? Items { get; set; }
+        public List<TopArtistItem>? Items { get; set; }
     }
 }
