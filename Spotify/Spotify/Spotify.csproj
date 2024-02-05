@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BananasGoBad-400.jpg" />
     <None Remove="Fonts\JosefinSans-VariableFont_wght.ttf" />
+    <None Remove="Images\icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="BananasGoBad-400.jpg" />
+    <Resource Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
