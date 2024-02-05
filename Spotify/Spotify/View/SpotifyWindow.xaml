@@ -3,17 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Spotify.ViewModel"
         xmlns:local="clr-namespace:Spotify.View"
-        xmlns:md="clr-namespace:Spotify.Model"
         mc:Ignorable="d"
         Title="Spotify Stats" Height="450" Width="800"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
         Icon="../Images/icon.png">
     <Window.Resources>
-        <md:Profile x:Key="profile"/>
-        <md:TopTracks x:Key="toptracks"/>
-        <md:TopTrackItem x:Key="item"/>
+        <vm:SpotifyAPIHandler x:Key="vm"/>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
         x:Name="Bd" BorderBrush="Black"
@@ -34,22 +32,23 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Window.Resources>
-    <Grid Background="#02070C" DataContext="{StaticResource toptracks}">
-        <Grid Margin="0,1,0,355" DataContext="{StaticResource profile}">
+    <Grid Background="#02070C" Height="534" VerticalAlignment="Top" DataContext="{StaticResource vm}">
+        <Grid Margin="0,1,0,441">
             <Ellipse Height="60" Width="60" Margin="10,10,730,8">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock FontFamily="JosefinSans" FontSize="18" HorizontalAlignment="Left" Margin="89,6,0,0" TextWrapping="Wrap" Text="{Binding DisplayName}" Foreground="#1C984E" VerticalAlignment="Top"/>
-            <TextBlock FontFamily="JosefinSans" FontSize="16" HorizontalAlignment="Left" Margin="89,31,0,0" TextWrapping="Wrap" Text="{Binding Id}" Foreground="#F0F3F5" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans" FontSize="18" HorizontalAlignment="Left" Margin="89,6,0,0" TextWrapping="Wrap" Foreground="#1C984E" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans" FontSize="16" HorizontalAlignment="Left" Margin="89,31,0,0" TextWrapping="Wrap" Foreground="#F0F3F5" VerticalAlignment="Top"/>
             <TextBlock FontFamily="JosefinSans"  FontSize="16" HorizontalAlignment="Left" Margin="89,53,0,0" TextWrapping="Wrap"  Foreground="#F0F3F5" VerticalAlignment="Top">
                 <Run Text="Followed by:"></Run>
-                <Run Text="{Binding Followers.Total}"></Run>
+                <Run ></Run>
                 <Run Text="users"></Run>
             </TextBlock>
-            <Button  
+            <Button
                 Content="Get"
+                Command="{Binding GetAPIKey}"
                 Background="#1C984E"
                 BorderThickness="0"
                 Width="100"
@@ -58,84 +57,33 @@
                 Foreground="#F0F3F5">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="30"/>
+                        <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" Text="API key" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,23,151,30"></TextBox>
-
-            <!--<TextBlock FontFamily="JosefinSans" FontSize="40" HorizontalAlignment="Left" Margin="395,12,0,10" TextWrapping="Wrap" Text="Top tracks:" Foreground="#F0F3F5" />-->
-
-            <!--<Border BorderBrush="Red" BorderThickness="1,1,1,1" CornerRadius="30,30,30,30" Width="400" Height="60" Background="#13293E" Margin="395,0,5,0">
-                <Grid Margin="363,9,25,-11">
-                    <Button  
-                           Content="Top genres"
-                           Background="#EF3E36"
-                           BorderThickness="0"
-                           Width="100"
-                           Height="30"
-                           Margin="-331,5,241,25"
-                           Foreground="#F0F3F5">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button  
-                           Content="Top tracks"
-                           Background="#02070C"
-                           BorderThickness="0"
-                           Width="100"
-                           Height="30"
-                           Margin="-215,5,125,25"
-                           Foreground="#13293E">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                    <Button  
-                           Content="Top artists"
-                           Background="#02070C"
-                           BorderThickness="0"
-                           Width="100"
-                           Height="30"
-                           Margin="-90,5,0,25"
-                           Foreground="#13293E">
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Border}">
-                                <Setter Property="CornerRadius" Value="30"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                </Grid>
-            </Border>-->
+            <TextBox x:Name="ClientID" Template="{StaticResource TextBoxBaseControlTemplate}" Text=" ClientID" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,17,151,50" />
+            <TextBox x:Name="SecretID" Template="{StaticResource TextBoxBaseControlTemplate}" Text=" SecretID" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,50,151,17"></TextBox>
         </Grid>
-        <ListView DataContext="{StaticResource toptracks }" Background="#02070C" BorderThickness="0" Height="360" Margin="0,74,0,0">
+        <ListView Background="#02070C" BorderThickness="0" Margin="0,93,0,50">
             <ListBoxItem></ListBoxItem>
             <ListBoxItem></ListBoxItem>
             <ListBoxItem></ListBoxItem>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border  BorderThickness="1,1,1,1" CornerRadius="30,30,30,30"  Height="120" Width="800"  Background="#13293E">
-                        <Grid DataContext="{StaticResource item}">
+                        <Grid>
                             <Ellipse Height="90" Width="90" Margin="10,14,698,14">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"/>
                                 </Ellipse.Fill>
                             </Ellipse>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#1C984E" Text="{Binding Name}" Margin="105,14,529,84"/>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Text="{Binding Album}" Margin="105,49,529,49"/>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Text="{Binding Artists[0]}" Margin="105,84,529,14"/>
+                            <TextBlock FontFamily="JosefinSans" Foreground="#1C984E" Margin="105,14,529,84"/>
+                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Margin="105,49,529,49"/>
+                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Margin="105,84,529,14"/>
                         </Grid>
-
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListView>
-
     </Grid>
 </Window>

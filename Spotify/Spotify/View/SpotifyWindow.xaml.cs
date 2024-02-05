@@ -23,5 +23,6 @@ namespace Spotify.View
         {
             InitializeComponent();
         }
+
     }
 }
