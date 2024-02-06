@@ -24,5 +24,6 @@ namespace Spotify.View
             InitializeComponent();
         }
 
+
     }
 }

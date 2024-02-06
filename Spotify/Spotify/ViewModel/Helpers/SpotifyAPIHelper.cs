@@ -1,4 +1,6 @@
-﻿using SpotifyAPI.Web;
+﻿using Newtonsoft.Json;
+using Spotify.Model;
+using SpotifyAPI.Web;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,18 +28,19 @@ namespace Spotify.ViewModel.Helpers
             handler.APIKey = responseBody.Split('"')[3];
             Debug.WriteLine(handler.APIKey);
 
-            RequesSelfProfile(handler);
+            RequestArtist(handler);
         }
 
-        public static async void RequesSelfProfile(SpotifyAPIHandler handler)
+        public static async void RequestArtist(SpotifyAPIHandler handler)
         {
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {handler.APIKey}");
 
-            using var response = await client.GetAsync("https://api.spotify.com/v1/me");
+            using var response = await client.GetAsync($"https://api.spotify.com/v1/artists/{handler.ArtistID}");
 
             string responseBody = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine(responseBody);
+            Artist ajtiszt = JsonConvert.DeserializeObject<Artist>(responseBody);
+            handler.Taylor = ajtiszt;
         }
     }
 }

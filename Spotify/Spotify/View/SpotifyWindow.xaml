@@ -36,15 +36,15 @@
         <Grid Margin="0,1,0,441">
             <Ellipse Height="60" Width="60" Margin="10,10,730,8">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"/>
+                    <ImageBrush ImageSource="{Binding Taylor.images[0].url}"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <TextBlock FontFamily="JosefinSans" FontSize="18" HorizontalAlignment="Left" Margin="89,6,0,0" TextWrapping="Wrap" Foreground="#1C984E" VerticalAlignment="Top"/>
-            <TextBlock FontFamily="JosefinSans" FontSize="16" HorizontalAlignment="Left" Margin="89,31,0,0" TextWrapping="Wrap" Foreground="#F0F3F5" VerticalAlignment="Top"/>
-            <TextBlock FontFamily="JosefinSans"  FontSize="16" HorizontalAlignment="Left" Margin="89,53,0,0" TextWrapping="Wrap"  Foreground="#F0F3F5" VerticalAlignment="Top">
+            <TextBlock FontFamily="JosefinSans" FontSize="18" HorizontalAlignment="Left" Text="{Binding Taylor.name}" Margin="105,3,0,0" TextWrapping="Wrap" Foreground="#1C984E" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans" FontSize="16" HorizontalAlignment="Left" Text="{Binding Taylor.popularity}" Margin="105,30,0,0" TextWrapping="Wrap" Foreground="#F0F3F5" VerticalAlignment="Top"/>
+            <TextBlock FontFamily="JosefinSans"  FontSize="16" HorizontalAlignment="Left" Text="{Binding Taylor.genres}" Margin="105,53,0,0" TextWrapping="Wrap"  Foreground="#F0F3F5" VerticalAlignment="Top">
                 <Run Text="Followed by:"></Run>
                 <Run ></Run>
-                <Run Text="users"></Run>
+                <Run Text="{Binding Taylor.followers.total}"></Run>
             </TextBlock>
             <Button
                 Content="Get"
@@ -53,7 +53,7 @@
                 BorderThickness="0"
                 Width="100"
                 Height="30"
-                Margin="675,20,25,28"
+                Margin="672,25,28,37"
                 Foreground="#F0F3F5">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -61,29 +61,15 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <TextBox x:Name="ClientID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,17,151,50" />
-            <TextBox x:Name="SecretID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientSecret, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,50,151,17"></TextBox>
+            <TextBox x:Name="ClientID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="430,17,184,50" />
+            <TextBox x:Name="SecretID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientSecret, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="430,50,184,17"></TextBox>
+            <TextBox x:Name="SecretID_Copy" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ArtistID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="234,47,442,20"/>
+            <Label Margin="234,14,412,38" Foreground="#FF69B4"> Taylor Swifts ID:</Label>
         </Grid>
-        <ListView Background="#02070C" BorderThickness="0" Margin="0,93,0,50">
-            <ListBoxItem></ListBoxItem>
-            <ListBoxItem></ListBoxItem>
-            <ListBoxItem></ListBoxItem>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border  BorderThickness="1,1,1,1" CornerRadius="30,30,30,30"  Height="120" Width="800"  Background="#13293E">
-                        <Grid>
-                            <Ellipse Height="90" Width="90" Margin="10,14,698,14">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#1C984E" Margin="105,14,529,84"/>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Margin="105,49,529,49"/>
-                            <TextBlock FontFamily="JosefinSans" Foreground="#F0F3F5" Margin="105,84,529,14"/>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListView>
+        <Ellipse Margin="226,93,226,99">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Taylor.images[0].url}"/>
+            </Ellipse.Fill>
+        </Ellipse>
     </Grid>
 </Window>
