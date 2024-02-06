@@ -61,8 +61,8 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <TextBox x:Name="ClientID" Template="{StaticResource TextBoxBaseControlTemplate}" Text=" ClientID" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,17,151,50" />
-            <TextBox x:Name="SecretID" Template="{StaticResource TextBoxBaseControlTemplate}" Text=" SecretID" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,50,151,17"></TextBox>
+            <TextBox x:Name="ClientID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,17,151,50" />
+            <TextBox x:Name="SecretID" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding ClientSecret, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#13293E" Foreground="#F0F3F5" Height="25" Margin="365,50,151,17"></TextBox>
         </Grid>
         <ListView Background="#02070C" BorderThickness="0" Margin="0,93,0,50">
             <ListBoxItem></ListBoxItem>

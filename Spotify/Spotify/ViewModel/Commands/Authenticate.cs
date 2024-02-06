@@ -24,7 +24,6 @@ namespace Spotify.ViewModel.Commands
         public void Execute(object? parameter)
         {
             SpotifyAPIHelper.RequestAPIKey(handler.ClientID, handler.ClientSecret, handler);
-            Debug.WriteLine(handler.APIKey);
         }
 
         public Authenticate(SpotifyAPIHandler handler)

@@ -13,11 +13,31 @@ namespace Spotify.ViewModel.Helpers
     {
         public static async void RequestAPIKey(string clientID, string clientSecret, SpotifyAPIHandler handler)
         {
-            var config = SpotifyClientConfig.CreateDefault();
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("grant_type", "client_credentials"),
+                new KeyValuePair<string, string>("client_id", clientID),
+                new KeyValuePair<string, string>("client_secret", clientSecret)
+            });
+            using var client = new HttpClient();
+            using var response = await client.PostAsync("https://accounts.spotify.com/api/token", content);
 
-            var request = new ClientCredentialsRequest(clientID, clientSecret);
-            var response = await new OAuthClient(config).RequestToken(request);
-            handler.APIKey = response.AccessToken;
+            string responseBody = await response.Content.ReadAsStringAsync();
+            handler.APIKey = responseBody.Split('"')[3];
+            Debug.WriteLine(handler.APIKey);
+
+            RequesSelfProfile(handler);
+        }
+
+        public static async void RequesSelfProfile(SpotifyAPIHandler handler)
+        {
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {handler.APIKey}");
+
+            using var response = await client.GetAsync("https://api.spotify.com/v1/me");
+
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Debug.WriteLine(responseBody);
         }
     }
 }
